@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 import argparse
+import os
 import sys
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 def main():
     args = parse_args()
     for filename in args.files:
         tasks = get_tasks_from_file(filename)
     for task in tasks:
+        clear_cli()
         print(''.join(task))
         input('Press enter to continue')
 
@@ -39,6 +41,9 @@ def detect_tasks(lines):
         task_lines.append(line)
     tasks.append('\n'.join(task_lines))
     return tasks[1:]
+
+def clear_cli():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 if __name__ == '__main__':
     main()
